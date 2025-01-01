@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Tracker 2025</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">2025 Skill Tracker</h2>
+    <p class="text-center">Track your progress on the skills you plan to learn in 2025!</p>
+
+    <div class="form-group">
+        <label for="new-skill">Add a Skill:</label>
+        <input type="text" class="form-control" id="new-skill" placeholder="Enter new skill">
+        <button class="btn btn-primary mt-2" onclick="addSkill()">Add Skill</button>
+    </div>
+
+    <h4>Skills to Learn</h4>
+    <div id="skill-list"></div>
+</div>
+
+<script>
+    // Initialize skills array from local storage or as an empty array
+    let skills = JSON.parse(localStorage.getItem('skills')) || [];
+
+    // Function to render skills
+    function renderSkills() {
+        const skillListContainer = document.getElementById('skill-list');
+        skillListContainer.innerHTML = '';
+
+        skills.forEach((skill, index) => {
+            const skillItem = document.createElement('div');
+            skillItem.classList.add('skill-item');
+
+            const skillText = document.createElement('span');
+            skillText.textContent = skill.name;
+
+            const markButton = document.createElement('button');
+            markButton.classList.add('btn', skill.learned ? 'btn-success' : 'btn-danger');
+            markButton.textContent = skill.learned ? 'Learned' : 'Not Learned';
+            markButton.onclick = () => markAsLearned(index);
+
+            skillItem.appendChild(skillText);
+            skillItem.appendChild(markButton);
+            skillListContainer.appendChild(skillItem);
+        });
+    }
+
+    // Function to add a new skill
+    function addSkill() {
+        const skillInput = document.getElementById('new-skill');
+        const skillName = skillInput.value.trim();
+        if (skillName) {
+            skills.push({ name: skillName, learned: false });
+            localStorage.setItem('skills', JSON.stringify(skills));
+            skillInput.value = '';
+            renderSkills();
+        }
+    }
+
+    // Function to mark a skill as learned
+    function markAsLearned(index) {
+        skills[index].learned = !skills[index].learned;
+        localStorage.setItem('skills', JSON.stringify(skills));
+        renderSkills();
+    }
+
+    // Initial render
+    renderSkills();
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

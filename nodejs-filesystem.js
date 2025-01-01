@@ -46,8 +46,8 @@ http.createServer((req,res)=>{
 
     /*
     <Update Files:/>
-    fs.appendFile() - method appends the specified content at the end of the specified file:
-    fs.writeFile() - method replaces the specified file and content:
+        fs.appendFile() - method appends the specified content at the end of the specified file:
+        fs.writeFile() - method replaces the specified file and content:
     */ 
     // writeFile----------------------------------------------------------------
     // fs.writeFile('mynewfile3.txt', 'This is my texts', function (err) {
@@ -56,8 +56,8 @@ http.createServer((req,res)=>{
     //   }); 
 
         /*
-    <Delete a File/>
-    */ 
+        <Delete a File/>
+        */ 
     // unlink()----------------------------------------------------------------
     // fs.unlink('mynewfile3.txt', function (err) {
     //     if (err) throw err;
@@ -65,10 +65,10 @@ http.createServer((req,res)=>{
     //   }); 
 
         /*
-    <Rename a File:/>
-    fs.appendFile() - method appends the specified content at the end of the specified file:
-    fs.writeFile() - method replaces the specified file and content:
-    */ 
+        <Rename a File:/>
+        fs.appendFile() - method appends the specified content at the end of the specified file:
+        fs.writeFile() - method replaces the specified file and content:
+        */ 
 
     fs.rename('mynewfile.html','myrenamedfile.txt', function (err) {
         if (err) throw err;
